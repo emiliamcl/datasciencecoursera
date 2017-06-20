@@ -17,11 +17,10 @@ data_test  <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.cs
 
 ## set database
 data_train
-db_training <- read.csv(url(data_train))
-db_testing  <- read.csv(url(data_test))
+db_training <- read.csv(url(data_train))db_testing  <- read.csv(url(data_test))
 
 
-* See training
+*See training
 head(db_training)
 
 names(db_training)
@@ -29,7 +28,7 @@ str(db_training)
 
 dim(db_training)
 
-** dim 19622 160
+dim 19622 160
 
 summary(db_training)
 
@@ -37,18 +36,15 @@ summary(db_training)
 
 >db testing coursera
 
-* See testing
+See testing
 head(db_testing)
 
 str(db_testing)
 
 dim(db_testing)
 
-*** dim 20 160  - 20/19622 =0,10%
+dim 20 160  - 20/19622 =0,10%
 
-
-
-\\\\\\\
 
 
 
@@ -69,7 +65,6 @@ summary(db_testing)
 ###first librarys
 
 ### Librarys
-
 library(knitr)
 
 library(caret)
@@ -99,7 +94,6 @@ db_testing <- db_testing[ , colSums(is.na(db_training)) == 0]
 
 
 ## Remove bad collums - nearzerovar
-
 badCols <- nearZeroVar(db_training)
 
 db_training <- db_training[, -badCols]
@@ -110,7 +104,6 @@ db_testing <- db_testing[, -badCols]
 
 
 ## use numeric variable - remove unrelevant variables
-
 nonwanted = c('X', 'user_name', 'raw_timestamp_part_1', 'raw_timestamp_part_2', 'cvtd_timestamp', 'new_window', 'num_window')
 
 db_training
@@ -119,7 +112,7 @@ db_training <- db_training[, -which(names(db_training) %in% nonwanted)]
 
 dim(db_training)
 
-* DIM 19622    53
+19622    53
 
 
 
@@ -127,14 +120,11 @@ db_testing <- db_testing[, -which(names(db_testing) %in% nonwanted)]
 
 dim(db_testing)
 
-[1] 20 53 
+20 53 
 
-## train test 53 ok
+## train test dim 53 ok
 
-
-
-#//////////new split data 70% train and 30%testing\\\\\\\\\\\
-
+## new split data 70% train and 30%testing
 
 
 Train2 <- createDataPartition(db_training$classe, p=0.70, list=F)
@@ -147,43 +137,36 @@ dim(db_training2)
 
 dim(db_testing2)
 
-# dim(db_training2)
+dim(db_training2)
 
-#[1] 13737    53
+[1] 13737    53
 
-# dim(db_testing2)
+dim(db_testing2)
 
-#[1] 5885   53
-
-
-
-#53 - 53 ok - same size
+[1] 5885   53
 
 
+53 - 53 ok - same size
 
-##2PredcModelscDT and RF##
 
+
+## 2PredcModelscDT and RF - make pred##
 
 
 
 
-##\\\\\\\\\\\\\\\\\\\\\\\\\\\Decision Tree w/ cross validation  - accuracy 0.6579//////////////////////////////
-
-
-
-
-
+# Decision Tree w/ cross validation  - accuracy 0.6579
 
 
 set.seed(1000)
 
 
 
-# Classification Tree with rpart
+## Classification Tree with rpart
 
 
 
-# grow tree w/ cross validation
+## grow tree w/ cross validation
 
 
 
@@ -203,15 +186,15 @@ dtree_fit <- train(classe~. , data=db_training2, method = "rpart",
 
 dtree_fit
 
-#13737 samples
+13737 samples
 
-#52 predictor
+52 predictor
 
-#35 classes: 'A', 'B', 'C', 'D', 'E' 
+35 classes: 'A', 'B', 'C', 'D', 'E' 
 
 
 
-#No pre-processing
+No pre-processing
 
 #Resampling: Cross-Validated (5 fold) 
 
@@ -221,33 +204,33 @@ dtree_fit
 
   
 
-#  cp          Accuracy   Kappa     
+cp          Accuracy   Kappa     
 
-#0.01383379  0.6396568  0.54759484
+0.01383379  0.6396568  0.54759484
 
-#0.01607161  0.6334692  0.54032757
+0.01607161  0.6334692  0.54032757
 
-#0.01647849  0.6334692  0.54032757
+0.01647849  0.6334692  0.54032757
 
-#0.01942834  0.6100263  0.50878370
+0.01942834  0.6100263  0.50878370
 
-#0.02014037  0.6100263  0.50878370
+0.02014037  0.6100263  0.50878370
 
-#0.02197132  0.5724634  0.45446767
+0.02197132  0.5724634  0.45446767
 
-#0.02766758  0.5724634  0.45446767
+0.02766758  0.5724634  0.45446767
 
-#0.03753433  0.5238415  0.38791979
+0.03753433  0.5238415  0.38791979
 
-#0.05987862  0.3666738  0.12581549
+0.05987862  0.3666738  0.12581549
 
-#0.11585800  0.3328251  0.07418774
+0.11585800  0.3328251  0.07418774
 
 
 
-#Accuracy was used to select the optimal model using  the largest value.
+Accuracy was used to select the optimal model using  the largest value.
 
-#The final value used for the model was cp = 0.01383379.
+The final value used for the model was cp = 0.01383379.
 
 
 
@@ -263,77 +246,71 @@ confusionMatrix(test_pred, db_training2$classe )  #check accuracy
 
 
 
-#Confusion Matrix and Statistics
+## Confusion Matrix and Statistics
 
 
 
-#Reference
+Reference
 
-#Prediction    A    B    C    D    E
+## Prediction    A    B    C    D    E
 
-#A 3133  418   77  108    4
+A 3133  418   77  108    4
 
-#B  134 1430  269  360  351
+B  134 1430  269  360  351
 
-#C  214  258 1704  333  287
+C  214  258 1704  333  287
 
-#D  382  552  346 1397  510
+D  382  552  346 1397  510
 
-#E   43    0    0   54 1373
-
-
-
-#Overall Statistics
+E   43    0    0   54 1373
 
 
-
-#Accuracy : 0.6579 >>>  
+## Overall Statistics
 
 
 
-#95% CI : (0.6499, 0.6658)
+Accuracy : 0.6579 >>>  
 
--#No Information Rate : 0.2843          
+95% CI : (0.6499, 0.6658)
 
-#P-Value [Acc > NIR] : < 2.2e-16       
+No Information Rate : 0.2843          
 
-
-
-#Kappa : 0.5688          
-
-#Mcnemar's Test P-Value : < 2.2e-16       
+P-Value [Acc > NIR] : < 2.2e-16       
 
 
 
-#Statistics by Class:
+Kappa : 0.5688          
+
+Mcnemar's Test P-Value : < 2.2e-16       
 
 
 
-#Class: A Class: B Class: C Class: D Class: E
+## Statistics by Class:
 
-#Sensitivity            0.8021   0.5380   0.7112   0.6203  0.54376
 
-#Specificity            0.9383   0.8994   0.9037   0.8441  0.99135
 
-#Pos Pred Value         0.8377   0.5621   0.6094   0.4383  0.93401
+Class: A Class: B Class: C Class: D Class: E
+Sensitivity            0.8021   0.5380   0.7112   0.6203  0.54376
 
-#Neg Pred Value         0.9227   0.8903   0.9368   0.9190  0.90609
+Specificity            0.9383   0.8994   0.9037   0.8441  0.99135
 
-#Prevalence             0.2843   0.1935   0.1744   0.1639  0.18381
+Pos Pred Value         0.8377   0.5621   0.6094   0.4383  0.93401
 
-#Detection Rate         0.2281   0.1041   0.1240   0.1017  0.09995
+Neg Pred Value         0.9227   0.8903   0.9368   0.9190  0.90609
 
-#Detection Prevalence   0.2723   0.1852   0.2035   0.2320  0.10701
+Prevalence             0.2843   0.1935   0.1744   0.1639  0.18381
+Detection Rate         0.2281   0.1041   0.1240   0.1017  0.09995
 
-#Balanced Accuracy      0.8702   0.7187   0.8074   0.7322  0.76756
+Detection Prevalence   0.2723   0.1852   0.2035   0.2320  0.10701
 
-#> 
+Balanced Accuracy      0.8702   0.7187   0.8074   0.7322  0.76756
+
+ 
 
 
 
 
-
-#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Random Forest w/ cross validation - accuracy 0.9884  - better ////////////////
+# Random Forest w/ cross validation - accuracy 0.9884  - better 
 
 
 
@@ -347,37 +324,35 @@ RF
 
 
 
-#RESULTS
+## Results
 
-#//////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+## Random Forest 
 
-#Random Forest 
+13737 samples
 
-#13737 samples
+52 predictor
 
-#52 predictor
-
-#5 classes: 'A', 'B', 'C', 'D', 'E' 
+5 classes: 'A', 'B', 'C', 'D', 'E' 
 
 
 
-#No pre-processing
+No pre-processing
 
-#Resampling: Cross-Validated (5 fold) 
+Resampling: Cross-Validated (5 fold) 
 
-#Summary of sample sizes: 10989, 10990, 10991, 10989, 10989 
+Summary of sample sizes: 10989, 10990, 10991, 10989, 10989 
 
-#Resampling results across tuning parameters:
+Resampling results across tuning parameters:
 
   
 
- #  mtry  Accuracy   Kappa    
+## mtry  Accuracy   Kappa    
 
-#2    0.9912645  0.9889488
+2    0.9912645  0.9889488
 
-#27    0.9908279  0.9883965
+27    0.9908279  0.9883965
 
-#52    0.9854412  0.9815808
+52    0.9854412  0.9815808
 
 
 
@@ -386,50 +361,44 @@ RF
 #The final value used for the model was mtry = 2.
 
 
+### Plot RF
 
-#//////////////////////////////////////////Plot RF\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-
-
-F#PLOT
-
-#library(reprtree)
+library(reprtree)
 
 
+options(repos='http://cran.rstudio.org')
 
-#options(repos='http://cran.rstudio.org')
+have.packages <- installed.packages()
 
-#have.packages <- installed.packages()
+cran.packages <- c('devtools','plotrix','randomForest','tree')
 
-#cran.packages <- c('devtools','plotrix','randomForest','tree')
+to.install <- setdiff(cran.packages, have.packages[,1])
 
-#to.install <- setdiff(cran.packages, have.packages[,1])
-
-#if(length(to.install)>0) install.packages(to.install)
+if(length(to.install)>0) install.packages(to.install)
 
 
 
-#library(devtools)
+library(devtools)
 
-#if(!('reprtree' %in% installed.packages())){
+if(!('reprtree' %in% installed.packages())){
 
-#  install_github('araastat/reprtree')
+install_github('araastat/reprtree')
 
-#}
+}
 
-#for(p in c(cran.packages, 'reprtree')) eval(substitute(library(pkg), list(pkg=p)))
-
-
-
-#model <- randomForest(classe ~ ., data=db_training2, importance=TRUE, ntree=200, mtry = 2, do.trace=100)
-
-#reprtree:::plot.getTree(model)
-
-#verydeep
+for(p in c(cran.packages, 'reprtree')) eval(substitute(library(pkg), list(pkg=p)))
 
 
 
-#//////////////////////////////////////////Model in testing data - Accuracy\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+model <- randomForest(classe ~ ., data=db_training2, importance=TRUE, ntree=200, mtry = 2, do.trace=100)
+
+reprtree:::plot.getTree(model)
+
+#verydeep 
+
+
+
+## Model in testing data - Accuracy
 
 
 
@@ -439,13 +408,14 @@ confusionMatrix(db_testing2$classe, predict_RF)
 
 
 
-#Confusion Matrix and Statistics
+## Confusion Matrix and Statistics
 
 
 
 #Reference
 
-#Prediction    A    B    C    D    E
+#Prediction    
+A    B    C    D    E
 
 #A 1672    2    0    0    0
 
@@ -459,11 +429,11 @@ confusionMatrix(db_testing2$classe, predict_RF)
 
 
 
-#Overall Statistics
+## Overall Statistics
 
 
 
-#Accuracy : 0.9884        >> better 
+## Accuracy : 0.9884        >> better 
 
 #95% CI : (0.9854, 0.991)
 
@@ -479,7 +449,7 @@ confusionMatrix(db_testing2$classe, predict_RF)
 
 
 
-###Statistics by Class:
+## Statistics by Class:
 
 
 
