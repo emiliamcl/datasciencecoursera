@@ -14,20 +14,17 @@ data_train <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.c
 
 data_test  <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
 
-###set database
 
+## set database
 data_train
-
 db_training <- read.csv(url(data_train))
-
 db_testing  <- read.csv(url(data_test))
 
 
-**see training
+* See training
 head(db_training)
 
 names(db_training)
-
 str(db_training)
 
 dim(db_training)
@@ -40,7 +37,7 @@ summary(db_training)
 
 >db testing coursera
 
-** see testing
+* See testing
 head(db_testing)
 
 str(db_testing)
@@ -51,7 +48,7 @@ dim(db_testing)
 
 
 
-\\\\\\\\
+\\\\\\\
 
 
 
@@ -94,32 +91,25 @@ library(RColorBrewer)
 set.seed(12345)
 
 
-
-
-
-#NA remove
+## NA remove
 
 db_training <- db_training[ , colSums(is.na(db_training)) == 0]
 
 db_testing <- db_testing[ , colSums(is.na(db_training)) == 0]
 
 
-
-
-
-#remove bad collums - nearzerovar
+## Remove bad collums - nearzerovar
 
 badCols <- nearZeroVar(db_training)
 
 db_training <- db_training[, -badCols]
 
 badCols <- nearZeroVar(db_testing)
-
 db_testing <- db_testing[, -badCols]
 
 
 
-#use numeric variable - remove unrelevant variables
+## use numeric variable - remove unrelevant variables
 
 nonwanted = c('X', 'user_name', 'raw_timestamp_part_1', 'raw_timestamp_part_2', 'cvtd_timestamp', 'new_window', 'num_window')
 
@@ -129,7 +119,7 @@ db_training <- db_training[, -which(names(db_training) %in% nonwanted)]
 
 dim(db_training)
 
-#19622    53
+* DIM 19622    53
 
 
 
@@ -137,9 +127,9 @@ db_testing <- db_testing[, -which(names(db_testing) %in% nonwanted)]
 
 dim(db_testing)
 
-#[1] 20 53 
+[1] 20 53 
 
-#traing test 53 ok
+## train test 53 ok
 
 
 
@@ -489,35 +479,31 @@ confusionMatrix(db_testing2$classe, predict_RF)
 
 
 
-#Statistics by Class:
+###Statistics by Class:
 
 
 
-#Class: A Class: B Class: C Class: D Class: E
+###Class: A Class: B Class: C Class: D Class: E
 
-#Sensitivity            0.9923   0.9842   0.9701   0.9937   1.0000
+###Sensitivity            0.9923   0.9842   0.9701   0.9937   1.0000
 
-#Specificity            0.9995   0.9960   0.9961   0.9949   0.9994
+###Specificity            0.9995   0.9960   0.9961   0.9949   0.9994
 
-#Pos Pred Value         0.9988   0.9833   0.9815   0.9741   0.9972
+###Pos Pred Value         0.9988   0.9833   0.9815   0.9741   0.9972
 
-#Neg Pred Value         0.9969   0.9962   0.9936   0.9988   1.0000
+###Neg Pred Value         0.9969   0.9962   0.9936   0.9988   1.0000
 
-#Prevalence             0.2863   0.1934   0.1764   0.1606   0.1833
+###Prevalence             0.2863   0.1934   0.1764   0.1606   0.1833
 
-#Detection Rate         0.2841   0.1903   0.1711   0.1596   0.1833
+###Detection Rate         0.2841   0.1903   0.1711   0.1596   0.1833
 
-#Detection Prevalence   0.2845   0.1935   0.1743   0.1638   0.1839
+###Detection Prevalence   0.2845   0.1935   0.1743   0.1638   0.1839
 
-#Balanced Accuracy      0.9959   0.9901   0.9831   0.9943   0.9997
-
-
-
-#######RF Predit with the  coursera test data - question######
+###Balanced Accuracy      0.9959   0.9901   0.9831   0.9943   0.9997
 
 
 
-
+## RF Predit with the  coursera test data - question######
 
 
 
