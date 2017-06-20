@@ -1,16 +1,12 @@
 ## Assignment week 4
-###Summary of the data
-### Cleanning
-###Split 70% 30% 
+### Import the dataset
+### Summary of the data
+### Cleanning the data *NA, non numeric, empty spaces
+### Split 70% 30% 
 ### Make prediction with 2 models DT and RForest *pml data
 ### See the accuracy of DT and RF
 ### and choose the better one
 ### Answer the question 
-
-
-## Importing the dataset in desktop
-
-setwd("")
 
 
 
