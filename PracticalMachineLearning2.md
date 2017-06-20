@@ -1,24 +1,20 @@
-Assignment week 4
+#Assignment week 4
 
 
 
-# Importing the dataset in desktop
+## Importing the dataset in desktop
 
 setwd("")
 
 
 
-
-
-
-
-# Importing the dataset by url
+## Importing the dataset by url
 
 data_train <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
 
 data_test  <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
 
-#set database
+###set database
 
 data_train
 
@@ -27,7 +23,7 @@ db_training <- read.csv(url(data_train))
 db_testing  <- read.csv(url(data_test))
 
 
-
+**see training
 head(db_training)
 
 names(db_training)
@@ -36,23 +32,22 @@ str(db_training)
 
 dim(db_training)
 
-#19622 160
+** dim 19622 160
 
 summary(db_training)
 
 
 
-//////// db testing coursera
+>db testing coursera
 
-
-
+** see testing
 head(db_testing)
 
 str(db_testing)
 
 dim(db_testing)
 
-#20 160  - 20/19622 =0,10%
+*** dim 20 160  - 20/19622 =0,10%
 
 
 
@@ -60,7 +55,7 @@ dim(db_testing)
 
 
 
-#Use bd_training 70% to train , 30% to test the model
+### then Use bd_training 70% to train , 30% to test the model
 
 names(db_training)
 
@@ -70,13 +65,13 @@ summary(db_testing)
 
 
 
-#cleanning the data
+##cleanning the data
 
 
 
-#first librarys
+###first librarys
 
-# Librarys
+### Librarys
 
 library(knitr)
 
