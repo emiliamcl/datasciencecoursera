@@ -158,6 +158,7 @@ dim(db_testing2)
 # Decision Tree w/ cross validation  - accuracy 0.6579
 
 
+
 set.seed(1000)
 
 
@@ -185,6 +186,8 @@ dtree_fit <- train(classe~. , data=db_training2, method = "rpart",
 
 
 dtree_fit
+
+## Results
 
 13737 samples
 
