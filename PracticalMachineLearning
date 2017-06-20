@@ -18,20 +18,25 @@ names(db_training)
 str(db_training)
 dim(db_training)
 #19622 160
+summary(db_training)
 
-
+//////// db testing coursera
 
 head(db_testing)
 str(db_testing)
 dim(db_testing)
-#20 160  - 20/19622=0,10% for testing -???  
-#use bd_training 70% to train 30% to test the model
+#20 160  - 20/19622 =0,10%
+
+\\\\\\\\
+
+#Use bd_training 70% to train , 30% to test the model
 names(db_training)
 summary(db_testing)
 
 
-#cleaning the data
+#cleanning the data
 
+#first librarys
 # Librarys
 library(knitr)
 library(caret)
@@ -148,7 +153,7 @@ confusionMatrix(test_pred, db_training2$classe )  #check accuracy
 #Accuracy : 0.6579 >>>  
 
 #95% CI : (0.6499, 0.6658)
-#No Information Rate : 0.2843          
+-#No Information Rate : 0.2843          
 #P-Value [Acc > NIR] : < 2.2e-16       
 
 #Kappa : 0.5688          
@@ -168,7 +173,7 @@ confusionMatrix(test_pred, db_training2$classe )  #check accuracy
 #> 
 
 
-#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Random Forest w/ cross validation - accuracy 0.9884  ////////////////
+#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Random Forest w/ cross validation - accuracy 0.9884  - better ////////////////
 
 CV <- trainControl(method="cv", 5) #Cross-Validation 5 fold
 RF <- train(classe ~ ., data=db_training2, method="rf", trControl=CV, ntree=200)
@@ -187,7 +192,7 @@ RF
 #Summary of sample sizes: 10989, 10990, 10991, 10989, 10989 
 #Resampling results across tuning parameters:
   
-#  mtry  Accuracy   Kappa    
+ #  mtry  Accuracy   Kappa    
 #2    0.9912645  0.9889488
 #27    0.9908279  0.9883965
 #52    0.9854412  0.9815808
@@ -197,7 +202,7 @@ RF
 
 #//////////////////////////////////////////Plot RF\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-#PLOT
+F#PLOT
 #library(reprtree)
 
 #options(repos='http://cran.rstudio.org')
@@ -253,7 +258,7 @@ confusionMatrix(db_testing2$classe, predict_RF)
 #Detection Prevalence   0.2845   0.1935   0.1743   0.1638   0.1839
 #Balanced Accuracy      0.9959   0.9901   0.9831   0.9943   0.9997
 
-#######Predit with the  coursera test data - question######
+#######RF Predit with the  coursera test data - question######
 
 
 
