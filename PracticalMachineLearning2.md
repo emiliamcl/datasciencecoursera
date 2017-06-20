@@ -1,4 +1,4 @@
-#Assignment week 4
+ #Assignment week 4
 
 
 
@@ -20,7 +20,7 @@ data_train
 db_training <- read.csv(url(data_train))db_testing  <- read.csv(url(data_test))
 
 
-*See training
+*See training data
 head(db_training)
 
 names(db_training)
@@ -36,7 +36,7 @@ summary(db_training)
 
 >db testing coursera
 
-See testing
+*See testing data
 head(db_testing)
 
 str(db_testing)
@@ -48,7 +48,7 @@ dim 20 160  - 20/19622 =0,10%
 
 
 
-### then Use bd_training 70% to train , 30% to test the model
+### Use bd_training 70% to train , 30% to test the model
 
 names(db_training)
 
@@ -57,8 +57,7 @@ summary(db_testing)
 
 
 
-
-##cleanning the data
+## cleanning the data
 
 
 
@@ -150,12 +149,12 @@ dim(db_testing2)
 
 
 
-## 2PredcModelscDT and RF - make pred##
+## 2PredcModelsc DT and RF - make pred##
 
 
 
 
-# Decision Tree w/ cross validation  - accuracy 0.6579
+# Decision Tree w/ cross validation  -> accuracy 0.6579
 
 
 
@@ -203,7 +202,7 @@ No pre-processing
 
 #Summary of sample sizes: 10990, 10990, 10989, 10989, 10990 
 
-#Resampling results across tuning parameters:
+## Resampling results across tuning parameters:
 
   
 
@@ -238,13 +237,14 @@ The final value used for the model was cp = 0.01383379.
 
 
 
-
+## plot
 prp(dtree_fit$finalModel, box.palette = "Reds", tweak = 1.2)
 
 
 
 test_pred <- predict(dtree_fit, newdata = db_training2)
 
+## see confusion matrix results
 confusionMatrix(test_pred, db_training2$classe )  #check accuracy
 
 
@@ -270,9 +270,7 @@ E   43    0    0   54 1373
 
 ## Overall Statistics
 
-
-
-Accuracy : 0.6579 >>>  
+## Accuracy : 0.6579 >>> RF better?  
 
 95% CI : (0.6499, 0.6658)
 
@@ -322,7 +320,6 @@ CV <- trainControl(method="cv", 5) #Cross-Validation 5 fold
 RF <- train(classe ~ ., data=db_training2, method="rf", trControl=CV, ntree=200)
 
 RF
-
 
 
 
@@ -436,7 +433,7 @@ A    B    C    D    E
 
 
 
-## Accuracy : 0.9884        >> better 
+## Accuracy : 0.9884        >> better than DT - Good accuracy 
 
 #95% CI : (0.9854, 0.991)
 
