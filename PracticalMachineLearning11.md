@@ -1,4 +1,5 @@
 
+
 ```
 ## Assignment week 4
 ### Import the dataset
@@ -8,6 +9,7 @@
 ### Make prediction with 2 models DT and RForest *pml data
 ### See the accuracy of DT and RF
 ### and choose the better one
+### RF wins
 ### Answer the question 
 
 ```
