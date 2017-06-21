@@ -1,0 +1,365 @@
+<html>
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Assigment</title>
+</head>
+
+<body>
+
+<p>We have to build a model with a good accuracy to "classe", using DT or Rforest. - </p>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Importing the dataset by url</span>
+<span class="hl std">data_train</span> <span class="hl kwb">&lt;-</span> <span class="hl str">"http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"</span>
+<span class="hl std">data_test</span>  <span class="hl kwb">&lt;-</span> <span class="hl str">"http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"</span>
+<span class="hl com">#set database</span>
+<span class="hl std">data_train</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">db_training</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl kwd">url</span><span class="hl std">(data_train))</span>
+<span class="hl std">db_testing</span>  <span class="hl kwb">&lt;-</span> <span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl kwd">url</span><span class="hl std">(data_test))</span>
+
+
+<span class="hl kwd">dim</span><span class="hl std">(db_training)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 19622   160
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">dim</span><span class="hl std">(db_testing)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1]  20 160
+</pre></div>
+</div></div>
+
+<p>librarys</p>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Librarys</span>
+<span class="hl kwd">library</span><span class="hl std">(knitr)</span>
+<span class="hl kwd">library</span><span class="hl std">(caret)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: package 'caret' was built under R version 3.3.3
+</pre></div>
+<div class="message"><pre class="knitr r">## Loading required package: lattice
+</pre></div>
+<div class="message"><pre class="knitr r">## Loading required package: ggplot2
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: package 'ggplot2' was built under R version 3.3.2
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(rpart)</span>
+<span class="hl kwd">library</span><span class="hl std">(rpart.plot)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: package 'rpart.plot' was built under R version 3.3.2
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(caret)</span>
+<span class="hl kwd">library</span><span class="hl std">(rattle)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: package 'rattle' was built under R version 3.3.3
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: package or namespace load failed for 'rattle'
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(corrplot)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: package 'corrplot' was built under R version 3.3.3
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(randomForest)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: package 'randomForest' was built under R version 3.3.2
+</pre></div>
+<div class="message"><pre class="knitr r">## randomForest 4.6-12
+</pre></div>
+<div class="message"><pre class="knitr r">## Type rfNews() to see new features/changes/bug fixes.
+</pre></div>
+<div class="message"><pre class="knitr r">## 
+## Attaching package: 'randomForest'
+</pre></div>
+<div class="message"><pre class="knitr r">## The following object is masked from 'package:ggplot2':
+## 
+##     margin
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(RColorBrewer)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: package 'RColorBrewer' was built under R version 3.3.2
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">12345</span><span class="hl std">)</span>
+</pre></div>
+</div></div>
+
+<p>Cleanning</p>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com">#NA remove</span>
+<span class="hl std">db_training</span> <span class="hl kwb">&lt;-</span> <span class="hl std">db_training[ ,</span> <span class="hl kwd">colSums</span><span class="hl std">(</span><span class="hl kwd">is.na</span><span class="hl std">(db_training))</span> <span class="hl opt">==</span> <span class="hl num">0</span><span class="hl std">]</span>
+<span class="hl std">db_testing</span> <span class="hl kwb">&lt;-</span> <span class="hl std">db_testing[ ,</span> <span class="hl kwd">colSums</span><span class="hl std">(</span><span class="hl kwd">is.na</span><span class="hl std">(db_training))</span> <span class="hl opt">==</span> <span class="hl num">0</span><span class="hl std">]</span>
+
+
+<span class="hl com">#remove bad collums - nearzerovar</span>
+<span class="hl std">badCols</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">nearZeroVar</span><span class="hl std">(db_training)</span>
+<span class="hl std">db_training</span> <span class="hl kwb">&lt;-</span> <span class="hl std">db_training[,</span> <span class="hl opt">-</span><span class="hl std">badCols]</span>
+<span class="hl std">badCols</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">nearZeroVar</span><span class="hl std">(db_testing)</span>
+<span class="hl std">db_testing</span> <span class="hl kwb">&lt;-</span> <span class="hl std">db_testing[,</span> <span class="hl opt">-</span><span class="hl std">badCols]</span>
+
+<span class="hl com">#use numeric variable - remove unrelevant variables</span>
+<span class="hl std">nonwanted</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">'X'</span><span class="hl std">,</span> <span class="hl str">'user_name'</span><span class="hl std">,</span> <span class="hl str">'raw_timestamp_part_1'</span><span class="hl std">,</span> <span class="hl str">'raw_timestamp_part_2'</span><span class="hl std">,</span> <span class="hl str">'cvtd_timestamp'</span><span class="hl std">,</span> <span class="hl str">'new_window'</span><span class="hl std">,</span> <span class="hl str">'num_window'</span><span class="hl std">)</span>
+
+<span class="hl std">db_training</span> <span class="hl kwb">&lt;-</span> <span class="hl std">db_training[,</span> <span class="hl opt">-</span><span class="hl kwd">which</span><span class="hl std">(</span><span class="hl kwd">names</span><span class="hl std">(db_training)</span> <span class="hl opt">%in%</span> <span class="hl std">nonwanted)]</span>
+<span class="hl kwd">dim</span><span class="hl std">(db_training)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 19622    53
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com">#19622    53</span>
+
+<span class="hl std">db_testing</span> <span class="hl kwb">&lt;-</span> <span class="hl std">db_testing[,</span> <span class="hl opt">-</span><span class="hl kwd">which</span><span class="hl std">(</span><span class="hl kwd">names</span><span class="hl std">(db_testing)</span> <span class="hl opt">%in%</span> <span class="hl std">nonwanted)]</span>
+<span class="hl kwd">dim</span><span class="hl std">(db_testing)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 20 53
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com">#[1] 20 53 </span>
+<span class="hl com">#traing test 53 ok</span>
+
+<span class="hl com">#new data 70% train and 30%testing</span>
+<span class="hl std">Train2</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">createDataPartition</span><span class="hl std">(db_training</span><span class="hl opt">$</span><span class="hl std">classe,</span> <span class="hl kwc">p</span><span class="hl std">=</span><span class="hl num">0.70</span><span class="hl std">,</span> <span class="hl kwc">list</span><span class="hl std">=F)</span>
+<span class="hl std">db_training2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">db_training[Train2, ]</span>
+<span class="hl std">db_testing2</span> <span class="hl kwb">&lt;-</span> <span class="hl std">db_training[</span><span class="hl opt">-</span><span class="hl std">Train2, ]</span>
+<span class="hl kwd">dim</span><span class="hl std">(db_training2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 13737    53
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">dim</span><span class="hl std">(db_testing2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 5885   53
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># dim(db_training2)</span>
+<span class="hl com">#[1] 13737    53</span>
+<span class="hl com"># dim(db_testing2)</span>
+<span class="hl com">#[1] 5885   53</span>
+</pre></div>
+</div></div>
+<p>Decision tree model</p>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">1000</span><span class="hl std">)</span>
+
+<span class="hl com"># Classification Tree with rpart</span>
+
+<span class="hl com"># grow tree w/ cross validation</span>
+
+<span class="hl std">trctrl</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">trainControl</span><span class="hl std">(</span><span class="hl kwc">method</span> <span class="hl std">=</span> <span class="hl str">"cv"</span><span class="hl std">,</span> <span class="hl kwc">number</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span> <span class="hl kwc">repeats</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">)</span>
+<span class="hl kwd">set.seed</span><span class="hl std">(</span><span class="hl num">3333</span><span class="hl std">)</span>
+<span class="hl std">dtree_fit</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">train</span><span class="hl std">(classe</span><span class="hl opt">~</span><span class="hl std">. ,</span> <span class="hl kwc">data</span><span class="hl std">=db_training2,</span> <span class="hl kwc">method</span> <span class="hl std">=</span> <span class="hl str">"rpart"</span><span class="hl std">,</span>
+                   <span class="hl kwc">parms</span> <span class="hl std">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">split</span> <span class="hl std">=</span> <span class="hl str">"information"</span><span class="hl std">),</span>
+                   <span class="hl kwc">trControl</span><span class="hl std">=trctrl,</span>
+                   <span class="hl kwc">tuneLength</span> <span class="hl std">=</span> <span class="hl num">10</span><span class="hl std">)</span>
+
+<span class="hl std">dtree_fit</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## CART 
+## 
+## 13737 samples
+##    52 predictor
+##     5 classes: 'A', 'B', 'C', 'D', 'E' 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 10990, 10990, 10989, 10989, 10990 
+## Resampling results across tuning parameters:
+## 
+##   cp          Accuracy   Kappa     
+##   0.01383379  0.6396568  0.54759484
+##   0.01607161  0.6334692  0.54032757
+##   0.01647849  0.6334692  0.54032757
+##   0.01942834  0.6100263  0.50878370
+##   0.02014037  0.6100263  0.50878370
+##   0.02197132  0.5724634  0.45446767
+##   0.02766758  0.5724634  0.45446767
+##   0.03753433  0.5238415  0.38791979
+##   0.05987862  0.3666738  0.12581549
+##   0.11585800  0.3328251  0.07418774
+## 
+## Accuracy was used to select the optimal model using  the largest value.
+## The final value used for the model was cp = 0.01383379.
+</pre></div>
+</div></div>
+
+<p>Plot</p>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com">#plot</span>
+<span class="hl kwd">prp</span><span class="hl std">(dtree_fit</span><span class="hl opt">$</span><span class="hl std">finalModel,</span> <span class="hl kwc">box.palette</span> <span class="hl std">=</span> <span class="hl str">"Reds"</span><span class="hl std">,</span> <span class="hl kwc">tweak</span> <span class="hl std">=</span> <span class="hl num">1.2</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-5-1.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" class="plot"></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl com">#Accuracy</span>
+
+<span class="hl std">test_pred</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">predict</span><span class="hl std">(dtree_fit,</span> <span class="hl kwc">newdata</span> <span class="hl std">= db_training2)</span>
+<span class="hl kwd">confusionMatrix</span><span class="hl std">(test_pred, db_training2</span><span class="hl opt">$</span><span class="hl std">classe )</span>  <span class="hl com">#check accuracy</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    A    B    C    D    E
+##          A 3133  418   77  108    4
+##          B  134 1430  269  360  351
+##          C  214  258 1704  333  287
+##          D  382  552  346 1397  510
+##          E   43    0    0   54 1373
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.6579          
+##                  95% CI : (0.6499, 0.6658)
+##     No Information Rate : 0.2843          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.5688          
+##  Mcnemar's Test P-Value : &lt; 2.2e-16       
+## 
+## Statistics by Class:
+## 
+##                      Class: A Class: B Class: C Class: D Class: E
+## Sensitivity            0.8021   0.5380   0.7112   0.6203  0.54376
+## Specificity            0.9383   0.8994   0.9037   0.8441  0.99135
+## Pos Pred Value         0.8377   0.5621   0.6094   0.4383  0.93401
+## Neg Pred Value         0.9227   0.8903   0.9368   0.9190  0.90609
+## Prevalence             0.2843   0.1935   0.1744   0.1639  0.18381
+## Detection Rate         0.2281   0.1041   0.1240   0.1017  0.09995
+## Detection Prevalence   0.2723   0.1852   0.2035   0.2320  0.10701
+## Balanced Accuracy      0.8702   0.7187   0.8074   0.7322  0.76756
+</pre></div>
+</div></div>
+
+
+<p>Random Forest</p>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">CV</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">trainControl</span><span class="hl std">(</span><span class="hl kwc">method</span><span class="hl std">=</span><span class="hl str">"cv"</span><span class="hl std">,</span> <span class="hl num">5</span><span class="hl std">)</span> <span class="hl com">#Cross-Validation 5 fold</span>
+<span class="hl std">RF</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">train</span><span class="hl std">(classe</span> <span class="hl opt">~</span> <span class="hl std">.,</span> <span class="hl kwc">data</span><span class="hl std">=db_training2,</span> <span class="hl kwc">method</span><span class="hl std">=</span><span class="hl str">"rf"</span><span class="hl std">,</span> <span class="hl kwc">trControl</span><span class="hl std">=CV,</span> <span class="hl kwc">ntree</span><span class="hl std">=</span><span class="hl num">200</span><span class="hl std">)</span>
+<span class="hl std">RF</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Random Forest 
+## 
+## 13737 samples
+##    52 predictor
+##     5 classes: 'A', 'B', 'C', 'D', 'E' 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 10988, 10990, 10991, 10989, 10990 
+## Resampling results across tuning parameters:
+## 
+##   mtry  Accuracy   Kappa    
+##    2    0.9903183  0.9877513
+##   27    0.9892268  0.9863706
+##   52    0.9837673  0.9794650
+## 
+## Accuracy was used to select the optimal model using  the largest value.
+## The final value used for the model was mtry = 2.
+</pre></div>
+</div></div>
+
+<p>RF confusion matrix</p>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">predict_RF</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">predict</span><span class="hl std">(RF, db_testing2)</span>
+<span class="hl kwd">confusionMatrix</span><span class="hl std">(db_testing2</span><span class="hl opt">$</span><span class="hl std">classe, predict_RF)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    A    B    C    D    E
+##          A 1673    1    0    0    0
+##          B   16 1117    6    0    0
+##          C    0   14 1009    3    0
+##          D    0    0   23  941    0
+##          E    0    0    0    3 1079
+## 
+## Overall Statistics
+##                                           
+##                Accuracy : 0.9888          
+##                  95% CI : (0.9858, 0.9913)
+##     No Information Rate : 0.287           
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.9858          
+##  Mcnemar's Test P-Value : NA              
+## 
+## Statistics by Class:
+## 
+##                      Class: A Class: B Class: C Class: D Class: E
+## Sensitivity            0.9905   0.9867   0.9721   0.9937   1.0000
+## Specificity            0.9998   0.9954   0.9965   0.9953   0.9994
+## Pos Pred Value         0.9994   0.9807   0.9834   0.9761   0.9972
+## Neg Pred Value         0.9962   0.9968   0.9940   0.9988   1.0000
+## Prevalence             0.2870   0.1924   0.1764   0.1609   0.1833
+## Detection Rate         0.2843   0.1898   0.1715   0.1599   0.1833
+## Detection Prevalence   0.2845   0.1935   0.1743   0.1638   0.1839
+## Balanced Accuracy      0.9951   0.9911   0.9843   0.9945   0.9997
+</pre></div>
+</div></div>
+
+<p>RF model in data test - coursera</p>
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">predict_RF</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">predict</span><span class="hl std">(RF, db_testing)</span>
+<span class="hl std">predict_RF</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] B A B A A E D B A A B C B A E E A B B B
+## Levels: A B C D E
+</pre></div>
+</div></div>
+
+
+
+
+</body></html>
