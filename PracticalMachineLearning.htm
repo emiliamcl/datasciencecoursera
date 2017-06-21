@@ -44,6 +44,7 @@
 .hl.opt {
   color: #000000;
 }
+
 .hl.std {
   color: #585858;
 }
@@ -67,7 +68,10 @@
 
 <body>
 
-<p>We have to build a model with a good accuracy to "classe", using DT or Rforest. - </p>
+<p>We have to build a model with a good accuracy to "classe", using DT or Rforest. Data set - dataset with 5 classes (sitting-down, standing-up, standing, walking, and sitting) collected on 8 hours of activities of 4 healthy subjects. 
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. 
+In this project, our goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants.
+Problem - predicting the "classe"- </p>
 
 <div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># Importing the dataset by url</span>
 <span class="hl std">data_train</span> <span class="hl kwb">&lt;-</span> <span class="hl str">"http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"</span>
