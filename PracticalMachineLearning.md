@@ -1,4 +1,4 @@
- 
+to our problem 
 
 ```
 ## Assignment week 4
@@ -11,7 +11,7 @@
 ### Make prediction with 2 models DT and RForest *pml data
 ### See the accuracy of DT and RF
 ### and choose the better one
-### RF wins with a better accuracy 
+### RF wins with a better accuracy to our problem
 ### Answer the question - w/ coursera pml-testing data
 
 ```
