@@ -91,7 +91,7 @@ set.seed(12345)
 
 ## NA remove
 
-db_training <- db_training[ , colSums(is.na(db_training)) == 0]
+`´db_training <- db_training[ , colSums(is.na(db_training)) == 0]
 
 db_testing <- db_testing[ , colSums(is.na(db_training)) == 0]
 
@@ -126,7 +126,7 @@ dim(db_testing)
 20 53 
 
 ## train test dim 53 ok
-
+`
 ## new split data 70% train and 30%testing
 
 
@@ -173,7 +173,7 @@ set.seed(1000)
 ## grow tree w/ cross validation
 
 
-
+`
 trctrl <- trainControl(method = "cv", number = 5, repeats = 5)
 
 set.seed(3333)
@@ -439,6 +439,7 @@ A    B    C    D    E
 
 ## Accuracy : 0.9884        >> better than DT - Good accuracy 
 
+```
 #95% CI : (0.9854, 0.991)
 
 #No Information Rate : 0.2863         
@@ -451,7 +452,7 @@ A    B    C    D    E
 
 #Mcnemar's Test P-Value : NA             
 
-
+```
 
 ## Statistics by Class:
 
@@ -480,7 +481,7 @@ A    B    C    D    E
 ## RF Predit with the  coursera test data - question######
 
 
-
+```
 predict_RF <- predict(RF, db_testing)
 
 predict_RF
@@ -488,5 +489,5 @@ predict_RF
 #[1] B A B A A E D B A A B C B A E E A B B B
 
 #Levels: A B C D E
-
+```
 
