@@ -1,0 +1,133 @@
+<html>
+
+<head>
+<title>Assigment</title>
+</head>
+
+<body>
+
+<p>We have to build a model with a good accuracy to "classe", using DT or Rforest. - </p>
+
+<!--begin.rcode
+# Importing the dataset by url
+data_train <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+data_test  <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+#set database
+data_train
+db_training <- read.csv(url(data_train))
+db_testing  <- read.csv(url(data_test))
+
+
+dim(db_training)
+dim(db_testing)
+end.rcode-->
+
+<p>librarys</p>
+
+<!--begin.rcode
+# Librarys
+library(knitr)
+library(caret)
+library(rpart)
+library(rpart.plot)
+library(caret)
+library(rattle)
+library(corrplot)
+library(randomForest)
+library(RColorBrewer)
+set.seed(12345)
+end.rcode-->
+
+<p>Cleanning</p>
+
+<!--begin.rcode
+#NA remove
+db_training <- db_training[ , colSums(is.na(db_training)) == 0]
+db_testing <- db_testing[ , colSums(is.na(db_training)) == 0]
+
+
+#remove bad collums - nearzerovar
+badCols <- nearZeroVar(db_training)
+db_training <- db_training[, -badCols]
+badCols <- nearZeroVar(db_testing)
+db_testing <- db_testing[, -badCols]
+
+#use numeric variable - remove unrelevant variables
+nonwanted = c('X', 'user_name', 'raw_timestamp_part_1', 'raw_timestamp_part_2', 'cvtd_timestamp', 'new_window', 'num_window')
+
+db_training <- db_training[, -which(names(db_training) %in% nonwanted)]
+dim(db_training)
+#19622    53
+
+db_testing <- db_testing[, -which(names(db_testing) %in% nonwanted)]
+dim(db_testing)
+#[1] 20 53 
+#traing test 53 ok
+
+#new data 70% train and 30%testing
+Train2 <- createDataPartition(db_training$classe, p=0.70, list=F)
+db_training2 <- db_training[Train2, ]
+db_testing2 <- db_training[-Train2, ]
+dim(db_training2)
+dim(db_testing2)
+# dim(db_training2)
+#[1] 13737    53
+# dim(db_testing2)
+#[1] 5885   53
+end.rcode-->
+<p>Decision tree model</p>
+
+<!--begin.rcode
+set.seed(1000)
+
+# Classification Tree with rpart
+
+# grow tree w/ cross validation
+
+trctrl <- trainControl(method = "cv", number = 5, repeats = 5)
+set.seed(3333)
+dtree_fit <- train(classe~. , data=db_training2, method = "rpart",
+                   parms = list(split = "information"),
+                   trControl=trctrl,
+                   tuneLength = 10)
+
+dtree_fit
+end.rcode-->
+
+<p>Plot</p>
+
+<!--begin.rcode
+#plot
+prp(dtree_fit$finalModel, box.palette = "Reds", tweak = 1.2)
+
+#Accuracy
+
+test_pred <- predict(dtree_fit, newdata = db_training2)
+confusionMatrix(test_pred, db_training2$classe )  #check accuracy
+end.rcode-->
+
+
+<p>Random Forest</p>
+
+<!--begin.rcode
+CV <- trainControl(method="cv", 5) #Cross-Validation 5 fold
+RF <- train(classe ~ ., data=db_training2, method="rf", trControl=CV, ntree=200)
+RF
+end.rcode-->
+
+<p>RF confusion matrix</p>
+
+<!--begin.rcode
+predict_RF <- predict(RF, db_testing2)
+confusionMatrix(db_testing2$classe, predict_RF)
+end.rcode-->
+
+<p>RF model in data test - coursera</p>
+<!--begin.rcode
+predict_RF <- predict(RF, db_testing)
+predict_RF
+end.rcode-->
+
+
+</body>
+</html>
