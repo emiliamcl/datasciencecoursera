@@ -1,7 +1,9 @@
-
+ 
 
 ```
 ## Assignment week 4
+## Problem - predicting the "classe"
+## steps
 ### Import the dataset
 ### Summary of the data
 ### Cleanning the data *NA, non numeric, empty spaces
@@ -9,8 +11,8 @@
 ### Make prediction with 2 models DT and RForest *pml data
 ### See the accuracy of DT and RF
 ### and choose the better one
-### RF wins
-### Answer the question 
+### RF wins with a better accuracy 
+### Answer the question - w/ coursera pml-testing data
 
 ```
 
