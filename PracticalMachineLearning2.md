@@ -91,7 +91,7 @@ set.seed(12345)
 
 ## NA remove
 
-`´db_training <- db_training[ , colSums(is.na(db_training)) == 0]
+db_training <- db_training[ , colSums(is.na(db_training)) == 0]
 
 db_testing <- db_testing[ , colSums(is.na(db_training)) == 0]
 
@@ -173,7 +173,7 @@ set.seed(1000)
 ## grow tree w/ cross validation
 
 
-`
+
 trctrl <- trainControl(method = "cv", number = 5, repeats = 5)
 
 set.seed(3333)
@@ -319,6 +319,7 @@ Balanced Accuracy      0.8702   0.7187   0.8074   0.7322  0.76756
 
 
 
+```
 CV <- trainControl(method="cv", 5) #Cross-Validation 5 fold
 
 RF <- train(classe ~ ., data=db_training2, method="rf", trControl=CV, ntree=200)
@@ -326,6 +327,7 @@ RF <- train(classe ~ ., data=db_training2, method="rf", trControl=CV, ntree=200)
 RF
 
 
+```
 
 
 ## Results
@@ -405,12 +407,14 @@ reprtree:::plot.getTree(model)
 ## Model in testing data - Accuracy
 
 
+```
 
 predict_RF <- predict(RF, db_testing2)
 
 confusionMatrix(db_testing2$classe, predict_RF)
 
 
+```
 
 ## Confusion Matrix and Statistics
 
