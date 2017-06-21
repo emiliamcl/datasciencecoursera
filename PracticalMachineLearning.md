@@ -1,6 +1,7 @@
 
 ```
 ## Assignment week 4
+## Data set - dataset with 5 classes (sitting-down, standing-up, standing, walking, and sitting) collected on 8 hours of activities of 4 healthy subjects. 
 ## Problem - predicting the "classe"
 ## steps
 ### Import the dataset
