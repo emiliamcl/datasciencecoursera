@@ -16,7 +16,7 @@ subs_plot4[1:1440,"Time"] <- format(subs_plot4[1:1440,"Time"],"2007-02-01 %H:%M:
 subs_plot4[1441:2880,"Time"] <- format(subs_plot4[1441:2880,"Time"],"2007-02-02 %H:%M:%S")
 
 
-
+#2 by 2 layout
 par(mfrow=c(2,2))
 
 #4 plots that form the graph
