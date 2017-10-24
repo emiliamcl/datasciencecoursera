@@ -64,7 +64,7 @@ steps_day_median
 ### 4 Time series plot of the average number of steps taken
 
 ```{r}
-average_ap<- aggregate(steps ~ interval, data_ds = activity, FUN = mean, na.rm = TRUE)
+average_ap<- aggregate(steps ~ interval, data = activity_ds, FUN = mean, na.rm = TRUE)
 
 ggplot(data=average_ap, aes(x=interval, y=steps)) +
   geom_line() +
