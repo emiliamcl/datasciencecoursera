@@ -1,7 +1,12 @@
 ---
 title: "Research_Project1"
-output: pdf_document
+output: html_document
 ---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, results = "asis")
+```
+
 #Reproducible Research: Peer Assessment 1
 ```{r}
 library(ggplot2)
