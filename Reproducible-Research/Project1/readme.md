@@ -1,17 +1,17 @@
 ## Course Project 1
 
-#### Code for reading in the dataset and/or processing the data
-#### Histogram of the total number of steps taken each day
-#### Mean and median number of steps taken each day
-#### Time series plot of the average number of steps taken
-#### The 5-minute interval that, on average, contains the maximum number of steps
-#### Code to describe and show a strategy for imputing missing data
-#### Histogram of the total number of steps taken each day after missing values are imputed
-#### Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
-#### All of the R code needed to reproduce the results (numbers, plots, etc.) in the report
+#### 1.Code for reading in the dataset and/or processing the data
+#### 2.Histogram of the total number of steps taken each day
+#### 3.Mean and median number of steps taken each day
+#### 4.Time series plot of the average number of steps taken
+#### 5.The 5-minute interval that, on average, contains the maximum number of steps
+#### 6.Code to describe and show a strategy for imputing missing data
+#### 7.Histogram of the total number of steps taken each day after missing values are imputed
+#### 8.Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
+#### 9. All of the R code needed to reproduce the results (numbers, plots, etc.) in the report
 
 
-Assignmentless 
+### Assignmentless 
 This assignment will be described in multiple parts. You will need to write a report that answers the questions detailed below. Ultimately, you will need to complete the entire assignment in a single R markdown document that can be processed by knitr and be transformed into an HTML file.
 
 Throughout your report make sure you always include the code that you used to generate the output you present. When writing code chunks in the R markdown document, always use echo = TRUE so that someone else will be able to read the code. This assignment will be evaluated via peer assessment so it is essential that your peer evaluators be able to review the code for your analysis.
@@ -26,19 +26,19 @@ Loading and preprocessing the data
 
 Show any code that is needed to
 
-#### Load the data (i.e. read.csv())
-#### Process/transform the data (if necessary) into a format suitable for your analysis
-#### What is mean total number of steps taken per day?
+#### 1.Load the data (i.e. read.csv())
+#### 2.Process/transform the data (if necessary) into a format suitable for your analysis
+#### 3.What is mean total number of steps taken per day?
 
 For this part of the assignment, you can ignore the missing values in the dataset.
 
-#### Calculate the total number of steps taken per day
-#### If you do not understand the difference between a histogram and a barplot, research the difference between them. 
-#### Make a histogram of the total number of steps taken each day
-#### Calculate and report the mean and median of the total number of steps taken per day
-#### What is the average daily activity pattern? 
-#### Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
-#### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+#### 1.Calculate the total number of steps taken per day
+#### 2.If you do not understand the difference between a histogram and a barplot, research the difference between them. 
+#### 3.Make a histogram of the total number of steps taken each day
+#### 4.Calculate and report the mean and median of the total number of steps taken per day
+#### 5.What is the average daily activity pattern? 
+#### 6.Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+#### 7.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 #### Imputing missing values
 
