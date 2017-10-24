@@ -3,6 +3,8 @@ title: "assignment cleaning data"
 output: html_document
 ---
 
+Data description: https://github.com/emiliamcl/datasciencecoursera/blob/master/Getting-and-cleaning-data/assignment_variables
+
 #features.txt': List of all features.
 activity_labels.txt': Links the class labels with their activity name.
 train/X_train.txt': Training set.
@@ -56,8 +58,6 @@ names(all_test)
 all_data <- rbind(all_train, all_test)
 
 #
-names(all_data)
-summary(all_data)
 
 
 #Extract only the measurements on the mean and standard deviation for each measurement
