@@ -188,5 +188,8 @@ plot2
 ```{r}
 xyplot(fivemin2$steps ~ fivemin2$interval|fivemin2$dow, main="Average Steps/Day",xlab="Interval", ylab="Steps",layout=c(1,2), type="l")
 ```
+setwd("C:/.../submit 1/")
+library(knitr)
+knit("PA1_template.Rmd", output = NULL)
 
 
