@@ -43,8 +43,8 @@ activity_ds$date <- ymd(activity_ds$date)
 ```{r}
 steps_day <- aggregate(steps ~ date, data = activity_ds, FUN = sum, na.rm = TRUE)
 plot(steps_day)
-
-
+```
+```{r, echo=FALSE}
 ggplot(steps_day, aes(x = steps)) + 
   geom_histogram(fill = "blue", binwidth = 500) + 
   labs(title="Histogram of Steps per Day", 
