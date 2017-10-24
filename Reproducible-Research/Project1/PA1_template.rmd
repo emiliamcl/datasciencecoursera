@@ -16,7 +16,7 @@ library(plyr)
 
 
 
-#1.Code for reading in the dataset and/or processing the data
+### 1.Code for reading in the dataset and/or processing the data
 ```{r}
 activity_ds <- read.csv('file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Rep research/repdata_Fdata_Factivity/activity.csv')
 head(activity_ds)
@@ -34,7 +34,7 @@ activity_ds$date <- ymd(activity_ds$date)
 ```
 
 
-#2 Histogram of the total number of steps taken each day
+### 2 Histogram of the total number of steps taken each day
 ```{r}
 steps_day <- aggregate(steps ~ date, data = activity_ds, FUN = sum, na.rm = TRUE)
 plot(steps_day)
@@ -49,7 +49,7 @@ ggplot(steps_day, aes(x = steps)) +
 
 
 
-#3. Calculate and report the mean and median total number of steps taken per day
+### 3. Calculate and report the mean and median total number of steps taken per day
 ```{r}
 steps_day_mean <- mean(steps_day$steps)
 steps_day_median <- median(steps_day$steps)
@@ -61,7 +61,7 @@ steps_day_median
 
 
 
-#4 Time series plot of the average number of steps taken
+### 4 Time series plot of the average number of steps taken
 
 ```{r}
 average_ap<- aggregate(steps ~ interval, data_ds = activity, FUN = mean, na.rm = TRUE)
@@ -75,7 +75,7 @@ ggplot(data=average_ap, aes(x=interval, y=steps)) +
 
 
 
-#5. The 5-minute interval that, on average, contains the maximum number of steps
+### 5. The 5-minute interval that, on average, contains the maximum number of steps
 
 ```{r}
 maxsteps <- average_ap$interval[which.max(average_ap$steps)]
@@ -87,7 +87,7 @@ maxsteps
 
 
 Imputing missing values
-# 6 Code to describe and show a strategy for imputing missing data
+### 6 Code to describe and show a strategy for imputing missing data
 
 Calculate and reportthe total number of rows with NAs)
 
@@ -129,7 +129,7 @@ summary(new_activity2)
 
 
 
-#7. Histogram of the total number of steps taken each day after missing values are imputed
+### 7. Histogram of the total number of steps taken each day after missing values are imputed
 Histogram without the NA values
 ```{r}
 hist(new_activity2$steps, 
