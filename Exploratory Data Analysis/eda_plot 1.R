@@ -16,5 +16,8 @@ nrow(subs_plot1)
 ###Making Plot
 
 hist(as.numeric(as.character(subs_plot1$Global_active_power)),col="red",main="Global Active Power",xlab="Global Active Power(kilowatts)")
-
+#title
 title(main="Global Active Power")
+#png
+dev.copy(png, file="plot1.png", height=480, width=480)
+dev.off()
