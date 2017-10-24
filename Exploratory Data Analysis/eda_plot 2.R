@@ -18,6 +18,8 @@ subs_plot2[1441:2880,"Time"] <- format(subs_plot2[1441:2880,"Time"],"2007-02-02 
 
 # Ploting
 plot(subs_plot2$Time,as.numeric(as.character(subs_plot2$Global_active_power)),type="l",xlab="",ylab="Global Active Power (kilowatts)") 
-
 # Title
 title(main="Global Active Power Vs Time")
+#png
+dev.copy(png, file="plot2.png", height=480, width=480)
+dev.off()
