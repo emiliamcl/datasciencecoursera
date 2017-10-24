@@ -4,8 +4,8 @@ require(dplyr)
 
 
 ## This first line will likely take a few seconds. Be patient!
-NEI <- readRDS("C:/Users/emili/OneDrive/Documents/datacience specialization/data exploring/exdata_Fdata_FNEI_data/summarySCC_PM25.rds")
-SCC <- readRDS("C:/Users/emili/OneDrive/Documents/datacience specialization/data exploring/exdata_Fdata_FNEI_data/Source_Classification_Code.rds")
+NEI <- readRDS(".../exdata_Fdata_FNEI_data/summarySCC_PM25.rds")
+SCC <- readRDS(".../exdata_Fdata_FNEI_data/Source_Classification_Code.rds")
 head(NEI)
 head(SCC)
 
