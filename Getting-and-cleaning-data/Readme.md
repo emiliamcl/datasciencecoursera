@@ -49,9 +49,9 @@ levels of Varible Activity >>> “activity_labels.txt”
 #### Read all datasets
 
 ```{r cars}
-trainx <- read.table("file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Geting and cleaning data quiz project/UCI HAR Dataset_assigment_gettingcleaningdata/train/X_train.txt")
-trainy <- read.table("file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Geting and cleaning data quiz project/UCI HAR Dataset_assigment_gettingcleaningdata/train/Y_train.txt",col.names=c("activity_ID"))
-train_subj <- read.table("file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Geting and cleaning data quiz project/UCI HAR Dataset_assigment_gettingcleaningdata/train/subject_train.txt",col.names=c("subject_ID"))
+trainx <- read.table("file:///.../train/X_train.txt")
+trainy <- read.table("file:///.../train/Y_train.txt",col.names=c("activity_ID"))
+train_subj <- read.table("file:///.../train/subject_train.txt",col.names=c("subject_ID"))
 
 
 # 
@@ -62,9 +62,9 @@ head(train_subj)
 nrow(trainx)
 
 ## Reading test
-testx <- read.table("file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Geting and cleaning data quiz project/UCI HAR Dataset_assigment_gettingcleaningdata/test/X_test.txt")
-testy <- read.table("file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Geting and cleaning data quiz project/UCI HAR Dataset_assigment_gettingcleaningdata/test/Y_test.txt",col.names=c("activity_ID"))
-test_subj <- read.table("file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Geting and cleaning data quiz project/UCI HAR Dataset_assigment_gettingcleaningdata/test/subject_test.txt",col.names=c("subject_ID"))
+testx <- read.table("file:///.../UCI HAR Dataset_assigment_gettingcleaningdata/test/X_test.txt")
+testy <- read.table("file:///.../test/Y_test.txt",col.names=c("activity_ID"))
+test_subj <- read.table("file:///.../test/subject_test.txt",col.names=c("subject_ID"))
 
 # 
 head(testx)
@@ -74,11 +74,11 @@ names(testx)
 nrow(testx)
 
 ## Reading feature
-features <- read.table('file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Geting and cleaning data quiz project/UCI HAR Dataset_assigment_gettingcleaningdata/features.txt',, col.names=c("feature_index", "feature_labels"))
+features <- read.table('file:///...t/UCI HAR Dataset_assigment_gettingcleaningdata/features.txt',, col.names=c("feature_index", "feature_labels"))
 head(features)
 
 ## Reading labels
-activity_labels = read.table('file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Geting and cleaning data quiz project/UCI HAR Dataset_assigment_gettingcleaningdata/activity_labels.txt',col.names=c("activity_ID","activityType"))
+activity_labels = read.table('file:///.../activity_labels.txt',col.names=c("activity_ID","activityType"))
 head(activity_labels)
 
 ## name x variables with the vector feature
