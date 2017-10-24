@@ -11,7 +11,7 @@ library(plyr)
 
 #1.Code for reading in the dataset and/or processing the data
 
-activity_ds <- read.csv('file:///C:/Users/emili/OneDrive/Documents/datacience specialization/Rep research/repdata_Fdata_Factivity/activity.csv')
+activity_ds <- read.csv('file:///.../repdata_Fdata_Factivity/activity.csv')
 head(activity_ds)
 dim(activity_ds)
 str(activity_ds)
