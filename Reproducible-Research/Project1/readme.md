@@ -40,7 +40,7 @@ For this part of the assignment, you can ignore the missing values in the datase
 #### 6.Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 #### 7.Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
-#### Imputing missing values
+### Imputing missing values
 
 ##### Note that there are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations or summaries of the data.
 
