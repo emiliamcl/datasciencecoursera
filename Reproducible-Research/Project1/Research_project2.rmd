@@ -47,10 +47,13 @@ plot(steps_day)
 
 
 ```{r, echo=TRUE}
-ggplot(steps_day, aes(x = steps)) + 
+p <- ggplot(steps_day, aes(x = steps)) + 
   geom_histogram(fill = "blue", binwidth = 500) + 
   labs(title="Histogram of Steps per Day", 
-       x = "Nr of Steps/Day", y = "(Count)") + theme_bw() 
+       x = "Nr of Steps/Day", y = "(Count)") + theme_bw()
+```
+```{r, echo=TRUE}
+plot(p)
 ```
 
 
