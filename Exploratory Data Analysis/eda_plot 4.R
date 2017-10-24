@@ -30,5 +30,7 @@ with(subs_plot4,{
   legend("topright", lty=1, col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), cex = 0.6)
   plot(subs_plot4$Time,as.numeric(as.character(subs_plot4$Global_reactive_power)),type="l",xlab="datetime",ylab="Global_reactive_power")
 })
-
+## Saving png
+dev.copy(png, file="plot4.png", height=480, width=480)
+dev.off()
 
